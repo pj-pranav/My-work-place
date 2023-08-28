@@ -3,3 +3,4 @@ b=float(3)
 c=str("5")
 d=int("9")
 print([a,b,c,d])
+data types:string,integer,float,boolean.
