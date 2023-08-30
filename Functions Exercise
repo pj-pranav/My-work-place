@@ -1,0 +1,8 @@
+def greeting(name,age,color):
+  print(f"Hello {name.capitalize()}, you are {str(age+1)} next birth day" )
+  print(f" we are hear you like color {color.lower()}! ")
+
+name=input("Enter your name: ")
+age=input("Enter your age: ")
+color=input("Enter your favoraite color: ")
+greeting(name,int(age),color)
