@@ -1,0 +1,122 @@
+is_raining=True
+print("Good morning ")
+if is_raining:
+  print("Bring umbrella")
+
+
+is_raining=True
+is_cold=True
+print("Good morning ")
+if is_raining or is_cold:
+  print("Bring umbrella or jacket")
+else:
+  print("umbrella is optional")
+
+
+is_raining=False
+is_cold=False
+print("Good morning ")
+if is_raining or is_cold:
+  print("Bring umbrella or jacket")
+else:
+  print("umbrella is optional")
+
+
+is_raining=True
+is_cold=False
+print("Good morning ")
+if is_raining and is_cold:
+  print("Bring umbrella and jacket")
+else:
+  print("umbrella is optional")
+
+
+is_raining=False
+is_cold=False
+print("Good morning ")
+if is_raining and is_cold:
+  print("Bring umbrella and jacket")
+elif is_raining and not(is_cold):
+  print("Bring umbrella")
+elif not(is_raining) and is_cold:
+  print("Bring jacket")
+
+else:
+  print("umbrella is optional")
+
+amount= float(input("Enter amount: "))
+if amount > 50:
+  print("purchase approved!")
+elif amount ==50:
+  print("not approved")
+else:
+  print("Please Enter your pin!")
+
+            MATH OPERATIONS
+mode=input("Enter math operation(+,_,*,/): ")
+num1=float(input("Enter a number: "))
+num2=float(input("Enter another number: "))
+if mode== '+':
+  print(f"Answer is:{num1 + num2} ")
+
+elif mode=='-':
+  print(f"Answer is:{num1 - num2}")
+elif mode=='*':
+  print(f"Answer is:{num1 * num2}")
+elif mode=='/':
+  print(f"Answer is:{num1 / num2}")
+
+else:
+  print("Input Error")
+
+mode=input("Enter math operation(+,_,*,/)or f for celsius to fahrenheit conversion: ")
+num1=float(input("Enter a number: "))
+if mode.lower() =='f':
+  print(f"{num1} is equivalent to {(num1*9/5)+32} fahrenheit" )
+else:
+  num2=float(input("Enter another number: "))
+  if mode== '+':
+    print(f"Answer is:{num1 + num2} ")
+
+  elif mode=='-':
+    print(f"Answer is:{num1 - num2}")
+  elif mode=='*':
+    print(f"Answer is:{num1 * num2}")
+  elif mode=='/':
+    print(f"Answer is:{num1 / num2}")
+
+  else:
+    print("Input Error")
+
+
+
+         USER INPUT [NUMBER OF DAYS IN MONTHS]
+
+month=input("Enter a month name in shortform: ")
+if month=='jan' or month=='mar' or month=='may' or month=='jul' or month=='aug' or month=='oct' or month=='dec':
+    print('number of days in' ,month , 'is', 31)
+elif month=='apr'or month=='jun'or month=='sep'or month=='nov':
+    print('nuber of days in', month,'is',30)
+elif month=='feb':
+    print('nuber of days in',month,'is',28)
+
+
+
+month=input("Enter a month name in shortform: ")
+if month=='jan' or month=='mar' or month=='may' or month=='jul' or month=='aug' or month=='oct' or month=='dec':
+  days=31
+elif month=='apr'or month=='jun'or month=='sep'or month=='nov':                
+  days=30
+elif month=='feb':
+  days=28
+print('nuber of days in',month,'is',days)
+
+
+month=input("Enter a month name in shortform: ")
+if month in ['jan', 'mar', 'may', 'jul', 'aug', 'oct', 'dec']:
+  days=31
+elif month in ['apr','jun','sep','nov']:
+  days=30
+elif month in ['feb']:
+  days=28
+print('nuber of days in',month,'is',days)
