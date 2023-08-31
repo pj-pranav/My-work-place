@@ -1,0 +1,45 @@
+i=1
+while i <= 5:
+  print(f"{i}."+"*"*i +"loops are awsome" + "*"*i)
+  i=i+1
+
+
+
+num = 76
+guess = 0
+guess_limit=5
+guess_number = 0
+guess = int(input(f'Guess a number 1-100: '))
+guess_number +=1
+while guess_number < guess_limit:
+    
+    if guess != num:
+        guess_number +=1
+        if guess > num:
+            guess = int(input(f'{guess} Too high - Guess again 1-100: '))
+        else:
+            guess = int(input(f'{guess} too low - Guess again 1-100: '))
+    if guess == num:
+        print(f'You Win! You Guessed it: {guess}')
+        break
+    
+if guess != num:
+    print(f'Sorry you lose! It was {num}')
+
+
+for name  in ['Happy','Birthday!']: 
+  print(name)
+
+
+  for name  in range (0,11,2): 
+  print(name)
+
+
+animals=['lion','tiger','cheeta','fox','wolf']
+i=1
+for animal in animals:
+  print(i,animal.title())
+  i=i+1
+
+for num, animal in enumerate(animals,1):
+    print(num,animal)
