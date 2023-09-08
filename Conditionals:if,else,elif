@@ -120,3 +120,33 @@ elif month in ['apr','jun','sep','nov']:
 elif month in ['feb']:
   days=28
 print('nuber of days in',month,'is',days)
+
+
+
+
+mode = input(
+    "Enter a math operation (+,-,*,/, or % for marks percent calculation): ")
+
+if mode =='%':
+  num = float(input("Enter your obtained marks: "))
+  num2 = float(input("Enter total marks: "))
+  print(f"your percentage is {(num/num2)*100} %")
+ 
+else:
+
+  num1 = float(input("Entr a number: "))
+  num3 = float(input("Enter another number: "))
+
+  if mode == '+':
+    print(f"The answer is {num1+num3} ")
+
+  elif mode == '-':
+      print(f"The answer is {num1-num3}")
+  elif mode == '*':
+      print(f"The answer is {num1*num3}")
+
+  elif mode == '/':
+      print(f"The answer is {float(num1/num3)}")
+    
+  else:
+      print("Enter available operation")
