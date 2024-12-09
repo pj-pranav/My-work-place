@@ -1,0 +1,307 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Definition of a node in the Binary Search Tree
+struct Node {
+    int data;
+    struct Node* left;
+    struct Node* right;
+};
+
+// Function to create a new node
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
+}
+
+// Function to insert an item into the BST
+struct Node* insert(struct Node* root, int data) {
+    if (root == NULL) {
+        return createNode(data);
+    }
+
+    if (data < root->data) {
+        root->left = insert(root->left, data);
+    } else if (data > root->data) {
+        root->right = insert(root->right, data);
+    }
+
+    return root;
+}
+
+// Function to search for an item in the BST
+struct Node* search(struct Node* root, int key) {
+    if (root == NULL || root->data == key) {
+        return root;
+    }
+
+    if (key < root->data) {
+        return search(root->left, key);
+    } else {
+        return search(root->right, key);
+    }
+}
+
+// Function to perform in-order traversal
+void inOrderTraversal(struct Node* root) {
+    if (root != NULL) {
+        inOrderTraversal(root->left);
+        printf("%d ", root->data);
+        inOrderTraversal(root->right);
+    }
+}
+
+// Main function
+int main() {
+    struct Node* root = NULL;
+    int exampleArray[] = {50, 30, 70, 20, 40, 60, 80}; // Example array
+    int n = sizeof(exampleArray) / sizeof(exampleArray[0]); // Number of elements in the array
+    int key,i;
+
+    // Insert elements from the array into the BST
+    printf("Inserting elements from the array into the BST:\n");
+    for ( i = 0; i < n; i++) {
+        root = insert(root, exampleArray[i]);
+        printf("%d ", exampleArray[i]);
+    }
+    printf("\nElements inserted successfully.\n");
+
+    // Perform an in-order traversal
+    printf("In-order traversal: ");
+    inOrderTraversal(root);
+    printf("\n");
+
+    // Perform a search operation
+    printf("Enter the item to search: ");
+    scanf("%d", &key);
+    if (search(root, key) != NULL) {
+        printf("Item found.\n");
+    } else {
+        printf("Item not found.\n");
+    }
+
+    return 0;
+}
+
+
+
+
+hash table     
+
+
+#include<stdio.h>
+#include<stdlib.h>
+
+int keys[20], hashIndex, numKeys, tableSize, *hashTable, elementCount = 0;
+int i;
+
+// Function to create the hash table and initialize all slots to -1 (empty)
+void createHashTable() {
+    hashTable = (int*)malloc(tableSize * sizeof(int));
+    if (hashTable == NULL) {
+        printf("MEMORY UNAVAILABLE!\n");
+    } else {
+        for (i = 0; i < tableSize; i++) {
+            hashTable[i] = -1;  // Initialize all slots to -1 (empty)
+        }
+    }
+}
+
+// Function to insert a key into the hash table using linear probing
+void insertIntoHashTable(int key) {
+    hashIndex = key % tableSize;  // Calculate the hash index using the modulo operation
+    // Resolve collisions using linear probing
+    while (hashTable[hashIndex] != -1) {  // If the computed index is already occupied
+        hashIndex = (hashIndex + 1) % tableSize;  // Move to the next slot (wrap around if needed)
+    }
+    hashTable[hashIndex] = key;  // Insert the key at the computed index
+    elementCount++;  // Increment the element count
+}
+
+// Function to display the hash table
+void displayHashTable() {
+    int i;
+    if (elementCount == 0) {
+        printf("HASH TABLE EMPTY\n");
+    }
+    for (i = 0; i < tableSize; i++) {
+        printf("T[%d]--> %d\n", i, hashTable[i]);
+    }
+}
+
+// Main function to drive the program
+int main() {
+    int i;
+    printf("Enter the number of keys: ");
+    scanf("%d", &numKeys);  // Read the number of keys to be inserted
+    printf("Enter the hash table size: ");
+    scanf("%d", &tableSize);  // Read the size of the hash table
+    printf("Enter the keys: \n");
+    for (i = 0; i < numKeys; i++) {
+        scanf("%d", &keys[i]);  // Read the keys
+    }
+
+    createHashTable();  // Create the hash table
+
+    printf("Inserting keys into the hash table:\n");
+    for (i = 0; i < numKeys; i++) {
+        if (elementCount == tableSize) {  // Check if the hash table is full
+            printf("HASH TABLE FULL\n");
+            printf("Can't insert the key %d\n", keys[i]);
+            break;
+        }
+        insertIntoHashTable(keys[i]);  // Insert the key into the hash table
+    }
+
+    displayHashTable();  // Display the final state of the hash table
+
+    return 0;
+}
+
+
+
+
+doubly linked list
+
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define the structure for a doubly linked circular list node
+typedef struct Node {
+    int data;
+    struct Node* prev;
+    struct Node* next;
+} Node;
+
+// Function to create a new node
+Node* createNode(int data) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    if (!newNode) {
+        printf("Memory allocation failed\n");
+        exit(1);
+    }
+    newNode->data = data;
+    newNode->prev = newNode->next = NULL;
+    return newNode;
+}
+
+// Initialize the header node
+Node* initializeList() {
+    Node* header = createNode(-1); // Header node does not hold data
+    header->prev = header->next = header; // Points to itself
+    return header;
+}
+
+// Function to insert a node into the list
+void insertNode(Node* header, int data) {
+    Node* newNode = createNode(data);
+    Node* last = header->prev; // Last node in the list
+    newNode->next = header;    // New node's next points to the header
+    newNode->prev = last;      // New node's prev points to the last node
+    last->next = newNode;      // Last node's next points to the new node
+    header->prev = newNode;    // Header's prev points to the new node
+    printf("Node with data %d inserted.\n", data);
+}
+
+// Function to delete a node from the list
+void deleteNode(Node* header, int data) {
+    Node* current = header->next;
+    while (current != header) {
+        if (current->data == data) {
+            Node* prev = current->prev;
+            Node* next = current->next;
+            prev->next = next;
+            next->prev = prev;
+            free(current);
+            printf("Node with data %d deleted.\n", data);
+            return;
+        }
+        current = current->next;
+    }
+    printf("Node with data %d not found.\n", data);
+}
+
+// Function to display the list in forward direction
+void displayForward(Node* header) {
+    Node* current = header->next;
+    if (current == header) {
+        printf("The list is empty.\n");
+        return;
+    }
+    printf("List in forward direction: ");
+    while (current != header) {
+        printf("%d ", current->data);
+        current = current->next;
+    }
+    printf("\n");
+}
+
+// Function to display the list in reverse direction
+void displayReverse(Node* header) {
+    Node* current = header->prev;
+    if (current == header) {
+        printf("The list is empty.\n");
+        return;
+    }
+    printf("List in reverse direction: ");
+    while (current != header) {
+        printf("%d ", current->data);
+        current = current->prev;
+    }
+    printf("\n");
+}
+
+// Main function
+int main() {
+    Node* header = initializeList();
+    int choice, data;
+
+    while (1) {
+        printf("\nDoubly Linked Circular List Operations:\n");
+        printf("1. Insert a node\n");
+        printf("2. Delete a node\n");
+        printf("3. Display list in forward direction\n");
+        printf("4. Display list in reverse direction\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter data to insert: ");
+                scanf("%d", &data);
+                insertNode(header, data);
+                break;
+            case 2:
+                printf("Enter data to delete: ");
+                scanf("%d", &data);
+                deleteNode(header, data);
+                break;
+            case 3:
+                displayForward(header);
+                break;
+            case 4:
+                displayReverse(header);
+                break;
+            case 5:
+                printf("Exiting program.\n");
+                exit(0);
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    }
+    return 0;
+}
+
+
+circular quoue 
+
+
+
+
+
